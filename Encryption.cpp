@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//This function takes an array of strings (arr), its size (size), and the number of rotations (rotations). 
+// It rotates the elements in the array clockwise by the specified number of rotations.
 static void rotateClockwise(string arr[], int size, int rotations) {
     string temp[size];
 
@@ -13,6 +15,8 @@ static void rotateClockwise(string arr[], int size, int rotations) {
     }
 }
 
+//This function takes an array of characters (arr), its size (n), and the number of rotations (k). 
+// It rotates the elements in the array to the right by the specified number of rotations.
 static void rotateArray(char arr[], int n, int k) {
     char temp[k];
     for (int i = 0; i < k; i++) {
@@ -26,6 +30,7 @@ static void rotateArray(char arr[], int n, int k) {
     }
 }
 
+// This function takes a string (dp) and calculates a random position based on the ASCII values of its characters.
 static int randomPosition(string dp)
 {
     int a=0;
@@ -37,6 +42,7 @@ static int randomPosition(string dp)
     return a;
 }
 
+// This function generates an array of 54 random numbers between 0 and n.
 static int* randomNumber(int n)
 {
     int* arr = new int[54];
@@ -48,6 +54,8 @@ static int* randomNumber(int n)
     return arr;
 }
 
+// This function takes a string (st) and a map (apl) containing character mappings. 
+// It encrypts the input string based on the mappings in the map.
 static string encryptSt(string st,map<char ,string>& apl)
 {
     string s;
@@ -67,9 +75,18 @@ static string encryptSt(string st,map<char ,string>& apl)
 int main()
 {
 
+     // Opens an output file named "filename.txt" using ofstream MyFile("filename.txt");. 
+     // ofstream is a stream class to write data to files.
      ofstream MyFile("filename.txt");
+    
+     // An array of characters representing a message
      char messagechar[54] = {'a','f','g','F','H','p','C','r','T','h','w','S','x','z','K','l','Q','o','N','b','A','J','.','D',
      'i','d','W','v','G','y','E','P','Y','O','M','L','U','Z','u','X','j','e','c','s','q','B','I','t','n','R','m',' ','V','k'};
+     
+
+     // Initializing three arrays messagechar, charcater, and alphabet. 
+     // messagechar represents the original message, charcater and alphabet represent different rotations of characters.
+     // Arrays representing different rotations of the characters
      char charcater[54] = {'D','f','s','W','E','e','V','r','T','t','Y','.','U','z','I','l','i','o','P','b','A','J','S','a','Q',
      'd','F','q','G','y','H','N','w','j','M','L','x','Z','u','X','O','p','c','g','v','B','K','h','n','R','m',' ','C','k'};
      char alphabet[54] =  {'G','s','L','B','t','q','E','X','i','J','v','R','y','k','N','M','O','Z','c','a','.','h','w','f','T',
@@ -389,6 +406,7 @@ for(int i=0;i<message.length();i++)
 
      MyFile<<s;
 }
+     // After all rotations, the file is closed.
      MyFile.close();
 
 cout <<"<<<<<<< Message Encryped Successfuly And Saved In Message File >>>>>>>";
