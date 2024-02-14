@@ -2,6 +2,7 @@
 
 Statistics of Algorithm
 • Private Phrase Generation - Algorithm can generate (2660)^54 number of unique Private Phrases.
+
 • Algorithm can generate 1.6*(10)^16 number of unique Encryption codes for a single character of a message.
 
 
