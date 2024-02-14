@@ -1,6 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+// This function performs an anticlockwise rotation on a string array.
+// arr is the input array to be rotated.
+// size is the size of the array.
+// rotations is the number of positions to rotate the array.
+// It uses a temporary array temp to store the original values.
+// It then calculates the new index after the rotation and updates the original array.
 static void rotateAnticlockwise(string arr[], int size, int rotations) {
     string temp[size];
 
@@ -13,6 +20,9 @@ static void rotateAnticlockwise(string arr[], int size, int rotations) {
     }
 }
 
+
+// This function takes a string st and a map apl.
+// For each character in st, it finds the corresponding string in the map apl and appends it to the result string s.
 static string change(string st ,map<char ,string>& apl)
 {
     string s;
@@ -27,6 +37,9 @@ static string change(string st ,map<char ,string>& apl)
     return s;
 }
 
+
+// This function calculates a random position based on the ASCII values of characters in the input string dp.
+// It sums the ASCII values, takes the modulus of the product of the length of dp and 2, and returns the result.
 static int randomPosition(string dp)
 {
     int a=0;
@@ -38,6 +51,10 @@ static int randomPosition(string dp)
     return a;
 }
 
+
+// This function rotates a character array arr by k positions.
+// It uses a temporary array temp to store the last k characters of the original array.
+// It then shifts the remaining characters to the right and copies the temporary array back to the beginning.
 static void rotateArray(char arr[], int n, int k) {
 
     char temp[k];
@@ -54,8 +71,11 @@ static void rotateArray(char arr[], int n, int k) {
     }
 }
 
+
 int main()
 {
+    
+  // ... (variable declarations and file reading)
    ifstream file;
   string filename="filename.txt";
   int line_number=4;
@@ -70,8 +90,16 @@ int main()
     cout << "File failed to open." << endl;
     return 1;
   }
+
+  // initializing current_line to 0.
   int current_line = 0;
   string line;
+
+
+  // Loop through lines in the file
+  // The code then enters a loop that reads lines from the file specified by the filename variable. 
+  // It continues reading lines until it reaches the specified line number (line_number), incrementing current_line with each iteration. 
+  // If the line is found, it breaks out of the loop.
   while (current_line<6)
   {
     current_line++;
@@ -84,6 +112,8 @@ int main()
     cout << "File contains " << current_line;
     cout << " lines total." << endl;
   }
+
+     // ... (further variable declarations)
      char messagechar[54] = {'a','f','g','F','H','p','C','r','T','h','w','S','x','z','K','l','Q','o','N','b','A','J','.','D','i','d','W','v','G','y','E','P','Y','O','M','L','U','Z','u','X','j','e','c','s','q','B','I','t','n','R','m',' ','V','k'};
      char charcater[54] = {'D','f','s','W','E','e','V','r','T','t','Y','.','U','z','I','l','i','o','P','b','A','J','S','a','Q','d','F','q','G','y','H','N','w','j','M','L','x','Z','u','X','O','p','c','g','v','B','K','h','n','R','m',' ','C','k'};
      char alphabet[54] =  {'G','s','L','B','t','q','E','X','i','J','v','R','y','k','N','M','O','Z','c','a','.','h','w','f','T','j', 'z','S','n','Q','b','F','U','Y','e','p','x','I',' ','r','K','C','u','V','m','l','A','o','P','D','H','g','W','d'};
@@ -92,6 +122,12 @@ int main()
 
      cout << "\n\n" << "--------------------------------------------------------------------------"<<"\n\n"<<"Decrypted Message:\n\n";
 
+
+     // After finding the line from the file, the code performs the first part of the decryption process. 
+     // It involves parsing the line into individual words, calculating a rotation value (r), and applying an anticlockwise rotation to an array (pp) 
+     // based on this value.
+     // A map (m) is created, associating characters from one array (charcater) with corresponding strings from another array (pp).
+     // The file is closed after reading.
      string pp[54],word="";
      int nW=0;
      for(auto x : line)
@@ -129,6 +165,13 @@ int main()
      }
      file.close();
 
+
+     // Another file is opened (filename_), and a line is read from it. 
+     // The line is stored in the ep variable.
+     // The code calculates shift values (shift and shiftm) based on characters found in the map (m). 
+     // It then rotates two arrays (messagechar and charcater) based on these shift values.
+     // Arrays of strings (encrypt, apl, and aplm) are created based on character arrays and mappings.
+     // A random position (rp) is determined based on a character from the map (m).
      ifstream file_;
      string filename_="filename.txt";
      int line_number_=10;
@@ -162,6 +205,10 @@ int main()
   
        file_.close();
 
+
+     // The code then enters a loop where it processes characters from the ep string.
+     // It forms a string (check) by appending characters from ep until it reaches specific lengths (8, 10, 12, 14). For each such substring, 
+     // it searches for a corresponding entry in the sortedkeywords array and outputs the associated character.
      string conf;
      auto pk=m.find('t');
      conf = pk->second;
@@ -286,6 +333,8 @@ int main()
         }
      }
 
+    // After the loop, a success message is printed to indicate that the message has been decrypted successfully.
+    // The program ends with additional formatting.
 cout<< "\n\n\n<<<<<<< The message Decrypted successfully >>>>>>>";
 cout << "\n\n" << "--------------------------------------------------------------------------\n";
 }
