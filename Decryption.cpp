@@ -78,13 +78,17 @@ int main()
   // ... (variable declarations and file reading)
    ifstream file;
   string filename="filename.txt";
-  int line_number=4;
+  
+  int line_number=4; //Used to determine line 4 of the file to read the encrypted words
+  
   if (line_number <= 0)
   {
     cout << "Line number must be >= 1" << endl;
     return 1;
   }
+  
   file.open(filename);
+  
   if (file.fail())
   {
     cout << "File failed to open." << endl;
@@ -124,46 +128,60 @@ int main()
 
 
      // After finding the line from the file, the code performs the first part of the decryption process. 
-     // It involves parsing the line into individual words, calculating a rotation value (r), and applying an anticlockwise rotation to an array (pp) 
-     // based on this value.
+     
+     // It involves parsing the line into individual words, calculating a rotation value (r), 
+     // and applying an anticlockwise rotation to an array (pp) based on this value.
+     
      // A map (m) is created, associating characters from one array (charcater) with corresponding strings from another array (pp).
      // The file is closed after reading.
      string pp[54],word="";
      int nW=0;
-     for(auto x : line)
+     
+     // parsing the line into individual words
+     //'line' contains the encrpted message in word form
+     for(auto x : line) ///This is a range-based for loop that iterates over each character (x) in the string line.
      {
-      if(x==' ')
-      {   pp[nW]=word;
-          word="";
-          nW++;
+      if(x == ' ') ///This checks if the current character x is a space. If it is, it means that a word has ended.
+      {   
+          pp[nW] = word; ///The word that has been built so far (stored in the word variable) is assigned to the nW-th element of the pp array.
+          word = ""; ///word variable is reset to an empty string to start building the next word.
+          nW++; ///counter nW is incremented to move to the next index in the pp array.
       }
-      else
+      else ///If the current character is not a space, it means the character is part of a word.
       {
-          word=word+x;
+          word = word+x; ///The current character x is appended to the word variable, building the word character by character.
+        ///   cout<<x;
+          
       }
      }
 
-     string confuse=pp[53];
+     string confuse=pp[53]; ///Extracted words from line
     
-     int r=(int)confuse.at(0);
-     int sum_=0;
+     // calculating a rotation value
+     int r = (int)confuse.at(0); /// initializes 'r' with ASCII value of 1st character of confuse string. This value is later used as a base for calculating the rotation.
+     int sum_ = 0; ///used to accumulate the sum of ASCII values of characters in the confuse string.
+     
+     //  iterates through the characters of the confuse string
      for(int i=1;i<confuse.length();i++)
      {
-        sum_+=(int)confuse.at(i);
+        sum_ += (int)confuse.at(i);
      }
-     r=r*(sum_);
-     r=r%54;
+     r = r*(sum_); /// 'r' is multiplied by the calculated sum
+     r = r%54; ///rotation value taken modulo 54, to ensure it remains within array indices.
 
+     //  applying an anticlockwise rotation to an array (pp) based on value 'r'
      rotateAnticlockwise(pp,53,r);
 
-     map<char,string> m;
+     // A map (m) is created, associating characters from one array (charcater) with corresponding strings 
+     //  from another array (pp).
+     map<char,string> m; ///mapping line words to array of characters
      {
      for(int i=0;i<54;i++)
      {
        m.insert({charcater[i] , pp[i]});
      }
      }
-     file.close();
+     file.close(); // The file is closed after reading.
 
 
      // Another file is opened (filename_), and a line is read from it. 
@@ -172,15 +190,16 @@ int main()
      // It then rotates two arrays (messagechar and charcater) based on these shift values.
      // Arrays of strings (encrypt, apl, and aplm) are created based on character arrays and mappings.
      // A random position (rp) is determined based on a character from the map (m).
+     
      ifstream file_;
-     string filename_="filename.txt";
-     int line_number_=10;
+     string filename_ = "filename.txt";
+     int line_number_ = 10; //To read the encrypted code of numbers
      if (line_number_ <= 0)
      {
        cout << "Line number must be >= 1" << endl;
        return 1;
      }
-       file_.open(filename_);
+       file_.open(filename_); // Another file is opened (filename_), and a line is read from it.
        if (file_.fail())
      {
        cout << "File failed to open." << endl;
@@ -188,7 +207,7 @@ int main()
      }
        int currentline = 0;
        string line_;
-       while (!file_.eof())
+     while (!file_.eof())
      {
        currentline++;
        getline(file_, line_);
@@ -201,14 +220,15 @@ int main()
        cout << " lines total." << endl;
      }
 
-       string ep=line_;
+       string ep=line_; // The line is stored in the ep variable.
   
        file_.close();
 
 
      // The code then enters a loop where it processes characters from the ep string.
-     // It forms a string (check) by appending characters from ep until it reaches specific lengths (8, 10, 12, 14). For each such substring, 
-     // it searches for a corresponding entry in the sortedkeywords array and outputs the associated character.
+     // It forms a string (check) by appending characters from ep until it reaches specific lengths (8, 10, 12, 14). 
+     // For each such substring, it searches for a corresponding entry in the sorted keywords array and 
+     //  outputs the associated character.
      string conf;
      auto pk=m.find('t');
      conf = pk->second;
