@@ -91,10 +91,11 @@ int main()
      'd','F','q','G','y','H','N','w','j','M','L','x','Z','u','X','O','p','c','g','v','B','K','h','n','R','m',' ','C','k'};
      char alphabet[54] =  {'G','s','L','B','t','q','E','X','i','J','v','R','y','k','N','M','O','Z','c','a','.','h','w','f','T',
      'j','z','S','n','Q','b','F','U','Y','e','p','x','I',' ','r','K','C','u','V','m','l','A','o','P','D','H','g','W','d'};
-     string encrypt[54];
+     string encrypt[54]; //'encrypt' array points Code for message/normal characters
      char rotatechar[54];
-     string keyWords[54];
-     // 2660 words-----
+     string keyWords[54]; //'keywords' array points Code for normal characters
+     
+     // 2660 words----- taken 2660 different English words of four different sizes(3,4,5,6)
      string Words[]={
 "aal","aam","aba","abb","abo","abs","aby","ace","ach","ack","act","add","ado","ads","adz","aft","age","ago","aha","aid","aim","air","ale",
 "all","ant","any","ape","app","apt","arc","are","arf","ark","arm","aro","ars","art","ash","ask","ass","ate","awe","awk","aww","axe","aye",
@@ -243,6 +244,7 @@ int main()
 cout << "\n\n" << "--------------------------------------------------------------------------";
 // cout<< "\n\n";
 
+// Using array of integers p[54] as an index to extract words from the string array 'Words' to create private phrase.
 MyFile <<  " The Private phrase is :" << "\n \n\n";
 int * p = randomNumber(2660);
 
@@ -254,9 +256,10 @@ int * p = randomNumber(2660);
 
 cout<<"\n";
 
+//Arranging random strings from array of string 'Words' taking random numbers from random numbers array 'p' 
 for(int i=0;i<54;i++)
 {
-    keyWords[i]=Words[p[i]];
+    keyWords[i]=Words[p[i]]; //'keywords' array points Code for normal characters
    // cout<<keyWords[i] <<" ";
 }
 cout<<"\n\n";
@@ -272,9 +275,10 @@ cout<<"\n\n";
      r=r*(sum_);
      r=r%54;
 
-
+// rotates the elements in array clockwise by the specified number of rotations.
 rotateClockwise(keyWords,53,r);
 
+// writing the content of keyWords array to the file associated with MyFile
 for(int i=0;i<54;i++)
 {
  MyFile << keyWords[i] <<" ";
@@ -282,6 +286,7 @@ for(int i=0;i<54;i++)
 
 MyFile << "\n\n\n";
 
+// Mapping each charater of 'charcater' array to a specific string from a random sequence of strings
 map<char,string> m;
 {
 for(int i=0;i<54;i++)
@@ -291,9 +296,14 @@ for(int i=0;i<54;i++)
 cout<<"\n";
 }
 
+     // generating unique two-digit random codes form "normal characters" and "message characters"
      string conf;
      auto pk=m.find('t');
      conf = pk->second;
+
+    //  Creating a shift value which will going to be random and by that shift value we will rotate the above 
+    //  array and use the last two digits ASCII value of these characters to create our two-digit code for each 
+    //  character of our assigned word
 
      int shift=(int)conf.at(0);
      int sum=0;
@@ -317,10 +327,13 @@ cout<<"\n";
      shiftm=shiftm*(sum2);
      shiftm=shiftm%54;
 
+// rotated the character array with our generated shift value
      rotateArray(messagechar,54,shiftm);
 
      rotateArray(charcater,54,shift);
 
+
+// created 2–digit code by the last 2 digits of ASCII of these characters and saved it in encrypt[] array of string type.
 for(int i=0;i<54;i++)
 {
     string s;
@@ -336,19 +349,22 @@ for(int i=0;i<54;i++)
     encrypt[i]=s;
 }
 
-map<char,string> apl;
+// created a map named 'apl' where we are mapping characters of the alphabet[] to our randomly generated code
+map<char,string> apl; //Mapping to generate code for normal characters
 {
 for(int i=0;i<54;i++)
 {
- apl.insert({alphabet[i] , encrypt[i]});
+ apl.insert({alphabet[i] , encrypt[i]}); //'encrypt' array points Code for normal characters
 }
 }
 
-map<char,string> aplm;
+
+// Similarly, generating another set of codes for encrypting the characters of the user input message
+map<char,string> aplm; //Mapping to generate code for message characters
 {
 for(int i=0;i<54;i++)
 {
- aplm.insert({messagechar[i] , encrypt[i]});
+ aplm.insert({messagechar[i] , encrypt[i]}); //'encrypt' array points Code for message characters
 }
 }
 
@@ -379,8 +395,11 @@ cout <<"\n\n";
 
              MyFile << "Encrypted message : \n\n\n";
 
+
+// Encryption of every character of message
 for(int i=0;i<message.length();i++)
 {
+    //Encryption of single message character in one go
     char ch=message.at(i);
 
     string st;
