@@ -155,7 +155,8 @@ int main()
       }
      }
 
-     string confuse=pp[53]; ///Extracted words from line
+     //Encryption me last ko rotate nhi kiya 
+     string confuse=pp[53]; ///pointing last word  for rotation
     
      // calculating a rotation value
      int r = (int)confuse.at(0); /// initializes 'r' with ASCII value of 1st character of confuse string. This value is later used as a base for calculating the rotation.
@@ -230,7 +231,7 @@ int main()
      // For each such substring, it searches for a corresponding entry in the sorted keywords array and 
      //  outputs the associated character.
      string conf;
-     auto pk=m.find('t');
+     auto pk=m.find('t'); //random
      conf = pk->second;
 
      int shift=(int)conf.at(0);
@@ -243,7 +244,7 @@ int main()
      shift=shift%54;
 
       string confm;
-     auto pkk=m.find('Y');
+     auto pkk=m.find('Y'); //random
      confm = pkk->second;
 
      int shiftm=(int)confm.at(0);
@@ -335,7 +336,7 @@ int main()
 
         int vip=-1;
 
-        if(check.length()==8 || check.length()==10 ||check.length()==12 ||check.length()==14)
+        if(check.length()==8 || check.length()==10 ||check.length()==12 ||check.length()==14) ///Encrypted 
         {
 
           for(int k=0;k<54;k++)
